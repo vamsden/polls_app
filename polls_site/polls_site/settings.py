@@ -20,12 +20,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'c7_7d&pe1p+qdkvjxthz@^+ua$hgl&cheqmc+(55cf6$jwyni%'
+SECRET_KEY = 'vak(7xnq02i$nqz2p3o)9=to3$6cfl6ydjhu-i9pmc2xf8^*mksk'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1',]
 
 
 # Application definition
@@ -76,10 +76,10 @@ WSGI_APPLICATION = 'polls_site.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'polls',
-        'USER': 'vandyk',
-        'PASSWORD': '72000619ps',
+        'ENGINE': 'mysql_backend',
+        'NAME': 'polls_db',
+        'USER': 'my_user',
+        'PASSWORD': 'password',
         'HOST': 'localhost',
         'PORT': 3306,
     }
@@ -127,3 +127,9 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+try:
+    # Python 3.4 use .local_settings.
+    from .local_settings import *
+except ImportError:
+    pass
