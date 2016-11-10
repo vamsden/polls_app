@@ -1,5 +1,7 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, get_object_or_404
+# Another way to serialize data into xml or json
+# from django.core import serializers
 
 from .models import Question, Choice
 
@@ -11,8 +13,16 @@ def index(request):
 	}
 	return render(request, 'index.html', context)
 
+# JsonResponse Test
+def jsonout(request):
+	question = Question.objects.all().values('question_text', 'pub_date')
+	question_list = list(question)
+	return JsonResponse(question_list, safe=False)
+	# data = serializers.serialize("xml", Question.objects.all())
+	# return JsonResponse(data, safe=False)
+
 def detail(request, question_id):
-	question = get_object_or_404(Question, pk=question_id)
+	question = get_obddject_or_404(Question, pk=question_id)
 	context = {
 		'question': question,
 	}
